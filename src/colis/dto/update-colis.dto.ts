@@ -32,6 +32,8 @@ import {
     @IsString()
     clientPhone: string;
 
-  
+    @IsOptional()
+    @IsString()
+    status: string;
     
   }

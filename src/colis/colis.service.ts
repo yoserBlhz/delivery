@@ -5,6 +5,7 @@ import { CreateColisDto } from './dto/create-colis.dto';
 import { Colis } from './schemas/colis.schema';
 import { JwtService } from '@nestjs/jwt';
 import { Livreur } from 'src/auth/schemas/livreur.schema';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Injectable()
 export class ColisService {
@@ -17,10 +18,12 @@ export class ColisService {
     const createdColis = new this.colisModel({
       ...createColisDto,
       livreur: livreur._id,
+      status: createColisDto.status || 'enStock', 
     });
-
+  
     return createdColis.save();
   }
+
 
   async findAll(query: any): Promise<Colis[]> {
     return this.colisModel.find(query).exec();
@@ -37,4 +40,11 @@ export class ColisService {
   async deleteById(id: string): Promise<Colis> {
     return this.colisModel.findByIdAndDelete(id).exec();
   }
+
+
+  async updateStatus(id: string, updateStatusDto: UpdateStatusDto): Promise<Colis> {
+    return this.colisModel.findByIdAndUpdate(id, { status: updateStatusDto.status }, { new: true }).exec();
+  }
+  
+
 }

@@ -31,6 +31,9 @@ import {
     @IsNotEmpty()
     @IsString()
     clientPhone: string;
-
+   
+    @IsNotEmpty()
+    @IsString()
+    status: string;
  
   }

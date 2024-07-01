@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -17,12 +18,13 @@ import { Colis } from './schemas/colis.schema';
 import { CreateColisDto } from './dto/create-colis.dto';
 import { UpdateColisDto } from './dto/update-colis.dto';
 import { Livreur } from 'src/auth/schemas/livreur.schema';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Controller('colis')
 export class ColisController {
   constructor(private readonly colisService: ColisService) {}
 
-@UseGuards(AuthGuard('jwt'))
+//@UseGuards(AuthGuard('jwt'))
  @Post()
  async createColis(
   @Body() colis: CreateColisDto,
@@ -31,6 +33,7 @@ export class ColisController {
   console.log('Received POST request to /colis', colis);
   const livreur: Livreur = req.user;
   console.log('Logged in Livreur:', livreur);
+  console.log(colis)
   return await this.colisService.create(colis, livreur);
 }
 
@@ -56,4 +59,12 @@ export class ColisController {
   async deleteColis(@Param('id') id: string): Promise<Colis> {
     return this.colisService.deleteById(id);
   }
+
+
+  @Patch(':id/status')
+  async updateStatus(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
+    return this.colisService.updateStatus(id, updateStatusDto);
+  }
+
+  
 }

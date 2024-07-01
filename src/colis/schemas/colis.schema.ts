@@ -21,6 +21,11 @@ export class Colis {
   
   @Prop()
   clientPhone: string;
+  
+
+  @Prop({ default: 'enStock' }) 
+  status: string;
+
 }
 
 export const ColisSchema = SchemaFactory.createForClass(Colis);
