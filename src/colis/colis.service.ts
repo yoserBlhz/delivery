@@ -25,6 +25,9 @@ export class ColisService {
   }
 
 
+
+
+
   async findAll(query: any): Promise<Colis[]> {
     return this.colisModel.find(query).exec();
   }

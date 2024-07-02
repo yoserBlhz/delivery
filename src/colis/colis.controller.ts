@@ -24,7 +24,7 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 export class ColisController {
   constructor(private readonly colisService: ColisService) {}
 
-//@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'))
  @Post()
  async createColis(
   @Body() colis: CreateColisDto,
@@ -34,7 +34,7 @@ export class ColisController {
   const livreur: Livreur = req.user;
   console.log('Logged in Livreur:', livreur);
   console.log(colis)
-  return await this.colisService.create(colis, livreur);
+  return await this.colisService.create(colis,livreur);
 }
 
   @Get()

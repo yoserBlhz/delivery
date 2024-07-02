@@ -1,6 +1,7 @@
 import {
     IsNotEmpty,
     IsNumber,
+    IsOptional,
     IsString,
   } from 'class-validator';
 
@@ -32,8 +33,8 @@ import {
     @IsString()
     clientPhone: string;
    
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    status: string;
+    status?: string;
  
   }
