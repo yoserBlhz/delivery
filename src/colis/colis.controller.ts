@@ -20,17 +20,17 @@ import { UpdateColisDto } from './dto/update-colis.dto';
 import { Livreur } from 'src/auth/schemas/livreur.schema';
 import { UpdateStatusDto } from './dto/update-status.dto';
 
-@Controller('colis')
+@Controller('facture')
 export class ColisController {
   constructor(private readonly colisService: ColisService) {}
 
 @UseGuards(AuthGuard('jwt'))
  @Post()
- async createColis(
+ async createFacture(
   @Body() colis: CreateColisDto,
   @Req() req: any,
 ): Promise<Colis> {
-  console.log('Received POST request to /colis', colis);
+  console.log('Received POST request to /facture', colis);
   const livreur: Livreur = req.user;
   console.log('Logged in Livreur:', livreur);
   console.log(colis)
@@ -38,17 +38,17 @@ export class ColisController {
 }
 
   @Get()
-  async getAllColis(@Query() query: ExpressQuery): Promise<Colis[]> {
+  async getAllFactures(@Query() query: ExpressQuery): Promise<Colis[]> {
     return this.colisService.findAll(query);
   }
 
   @Get(':id')
-  async getColis(@Param('id') id: string): Promise<Colis> {
+  async getFacture(@Param('id') id: string): Promise<Colis> {
     return this.colisService.findById(id);
   }
 
   @Put(':id')
-  async updateColis(
+  async updateFacture(
     @Param('id') id: string,
     @Body() colis: UpdateColisDto,
   ): Promise<Colis> {
@@ -56,7 +56,7 @@ export class ColisController {
   }
 
   @Delete(':id')
-  async deleteColis(@Param('id') id: string): Promise<Colis> {
+  async deleteFacture(@Param('id') id: string): Promise<Colis> {
     return this.colisService.deleteById(id);
   }
 
