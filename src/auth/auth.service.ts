@@ -14,7 +14,7 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name);
 
   constructor(
-    @InjectModel(Livreur.name)
+    @InjectModel(Transporteur.name)
    // private livreurModel: Model<Livreur>,
     private transporteurModel: Model<Transporteur>,
 
@@ -79,23 +79,27 @@ export class AuthService {
       this.logger.debug(`Logging in user with email: ${email}`);
       if (!email || !password) {
         this.logger.error('Email or password is missing');
-        throw new UnauthorizedException('Invalid email or password');
+        throw new UnauthorizedException('Missing email or password');
       }
   
       const livreur = await this.transporteurModel.findOne({ email });
   
       if (!livreur) {
         this.logger.error('User not found');
-        throw new UnauthorizedException('Invalid email or password');
+        throw new UnauthorizedException('Invalid email ');
       }
   
-      const isPasswordMatched = await bcrypt.compare(password, livreur.password);
+     /* const isPasswordMatched = await bcrypt.compare(password, livreur.password);
   
       if (!isPasswordMatched) {
         this.logger.error('Password does not match');
-        throw new UnauthorizedException('Invalid email or password');
+        throw new UnauthorizedException('Invalid password');
       }
-  
+  */
+ if (password !== livreur.password) {
+    this.logger.error('Password does not match');
+    throw new UnauthorizedException('Invalid password');
+  }
       const token = this.jwtService.sign({ id: livreur._id });
   
       return { token };

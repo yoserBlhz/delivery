@@ -76,5 +76,10 @@ import { UpdateStatusDto } from './dto/update-status.dto';
   async countByLivreur(@Param('livreur') livreur: string) {
     return this.factureService.countByLivreur(livreur);
   }
+  @Get('transporteur/:email')
+  async findByUserEmail(@Param('email') email: string): Promise<Facture[]> {
+    return this.factureService.findByUserEmail(email);
+  }
+
   }
   

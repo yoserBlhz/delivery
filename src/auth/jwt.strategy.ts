@@ -4,6 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Model } from 'mongoose';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Livreur } from './schemas/livreur.schema';
+import { Transporteur } from 'src/transporteur/schemas/transporteur.schema';
 
 interface JwtPayload {
   id: string;
@@ -12,7 +13,7 @@ interface JwtPayload {
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @InjectModel(Livreur.name) private livreurModel: Model<Livreur>,
+    @InjectModel(Transporteur.name) private transporteurModel: Model<Transporteur>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -23,7 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: JwtPayload) {
     const { id } = payload;
 
-    const livreur = await this.livreurModel.findById(id);
+    const livreur = await this.transporteurModel.findById(id);
 
     if (!livreur) {
       throw new UnauthorizedException('Invalid token');

@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './jwt.strategy';
+import { TransporteurSchema } from 'src/transporteur/schemas/transporteur.schema';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { JwtStrategy } from './jwt.strategy';
         };
       },
     }),
-    MongooseModule.forFeature([{ name: 'Livreur', schema: LivreurSchema }]),
+    MongooseModule.forFeature([{ name: 'Transporteur', schema: TransporteurSchema }]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

@@ -64,4 +64,9 @@ export class FactureService {
   async countByLivreur(livreur: string): Promise<number> {
     return this.FactureModel.countDocuments({ livreur }).exec();
   }
+
+  //retourne la liste des factures pour un livreur par email
+  async findByUserEmail(email: string): Promise<Facture[]> {
+    return this.FactureModel.find({ email }).exec();
+  }
 }
