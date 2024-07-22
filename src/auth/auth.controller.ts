@@ -9,11 +9,11 @@ export class AuthController {
 
   constructor(private authService: AuthService) {}
 
-  @Post('/signup')
+ /* @Post('/signup')
   signUp(@Body() signUpDto: SignUpDto): Promise<{ token: string }> {
     this.logger.debug(`Received signup request for email: ${signUpDto.email}`);
     return this.authService.signUp(signUpDto);
-  }
+  }*/
 
   @Post('/login')
   login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
