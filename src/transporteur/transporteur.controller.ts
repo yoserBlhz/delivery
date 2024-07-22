@@ -38,4 +38,10 @@ export class TransporterController {
   async countAll() {
     return this.transporteurService.countAll();
   }
+
+  @Get('email/:email')
+  async findByEmail(@Param('email') email: string): Promise<Transporteur> {
+    console.log(`Controller received email: ${email}`);
+    return this.transporteurService.findByEmail(email);
+  }
 }

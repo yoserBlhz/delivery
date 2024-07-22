@@ -35,4 +35,14 @@ export class TransporteurService {
   async countAll(): Promise<number> {
     return this.transporteurModel.countDocuments().exec();
   }
+
+ /* async findByEmail(email: string): Promise<Transporteur> {
+    console.log(`Finding transporteur by email: ${email}`);
+    return this.transporteurModel.findOne({ email }).exec();
+  }*/
+    async findByEmail(email: string): Promise<Transporteur> {
+      console.log(`Finding transporteur by email: ${email}`);
+      const transporteurs = await this.findAll();
+      return transporteurs.find(transporteur => transporteur.email === email);
+    }
 }

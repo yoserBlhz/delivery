@@ -6,12 +6,14 @@ import { JwtService } from '@nestjs/jwt';
 import { Facture } from './schemas/facture.schema';
 import { CreateFactureDto } from './dto/create-facture.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
+import { TransporteurService } from 'src/transporteur/transporteur.service';
 
 @Injectable()
 export class FactureService {
   constructor(
     @InjectModel(Facture.name) private readonly FactureModel: Model<Facture>,
     private readonly jwtService: JwtService,
+    private readonly transporteurService: TransporteurService,
   ) {}
 
   async create(createFactureDto: CreateFactureDto): Promise<Facture> {
@@ -67,6 +69,17 @@ export class FactureService {
 
   //retourne la liste des factures pour un livreur par email
   async findByUserEmail(email: string): Promise<Facture[]> {
-    return this.FactureModel.find({ email }).exec();
+    // Fetch the transporter's details using the email
+    const transporteur = await this.transporteurService.findByEmail(email);
+
+    if (!transporteur) {
+      throw new Error('Transporter not found');
+    }
+
+    // Construct the full name of the transporter
+    const livreurFullName = `${transporteur.nom} ${transporteur.prenom}`;
+
+    // Find invoices by the transporter's full name
+    return this.FactureModel.find({ livreur: livreurFullName }).exec();
   }
 }
