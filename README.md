@@ -22,9 +22,64 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Backend - Service de Livraison
+Ce projet représente l'API backend pour le service de livraison, développée en utilisant NestJS. Le backend gère toutes les fonctionnalités principales telles que la gestion des livreurs, des colis, des factures, ainsi que l'envoi de SMS via Twilio.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Fonctionnalités
+Gestion des livreurs : CRUD (Créer, Lire, Mettre à jour, Supprimer) des livreurs.
+
+Gestion des colis : Suivi des colis avec différentes options de statut (en cours, livré, retourné).
+
+Gestion des factures : Génération et suivi des factures liées aux livraisons.
+
+Notifications par SMS : Envoi automatique d'un SMS au client lorsque le colis est en route, via Twilio.
+
+Sécurité : Authentification des utilisateurs avec JWT et utilisation de AuthGuard pour protéger les routes sensibles.
+
+Déploiement : Le projet est déployé en ligne sur Render.
+
+## Technologies utilisées
+NestJS : Framework Node.js pour construire l'API.
+
+MongoDB : Base de données NoSQL pour stocker les données des livreurs, colis, factures, etc.
+
+JWT : JSON Web Token pour l'authentification et la sécurisation des API.
+
+Twilio : Service pour l'envoi de SMS.
+
+Render : Service de déploiement pour l'API backend.
+
+## Prérequis
+Node.js 
+
+MongoDB
+
+NestJS CLI
+
+## Installation
+Cloner le projet 
+
+Installer les dépendances :
+
+    npm install
+
+Configurer les variables d'environnement :
+
+JWT_SECRET=your_jwt_secret
+
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+
+TWILIO_PHONE_NUMBER=your_twilio_phone_number
+
+Démarrer l'application :
+
+    npm run start
+L'API sera disponible à l'adresse suivante :
+
+http://localhost:3000
+
 
 ## Installation
 
@@ -58,16 +113,4 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
